@@ -1,11 +1,10 @@
 '''
 This is the main driver file
-It will be responsible for handling user input and displaying current GameState
+It will be responsible for handling user input and displaying current GameState through the GUI
 '''
 
 import pygame as p
 import sys
-from random import randint 
 from Damas import DamasEngine
 
 #these are all the basic constants used by the gui engine
@@ -44,7 +43,6 @@ set_layout = [(WIDTH * 5 // 6,  HEIGHT * 3 // 10 - OFFSET * 2, BUTTON_WIDTH // 5
 
 #all the colors used by the game
 BLUE_HOVER = p.Color(139, 188, 205)
-BLACK_HOVER = p.Color(73, 160, 110)
 LIGHT_SQ_COLOR = p.Color(225,235,218)
 DARK_SQ_COLOR = p.Color(119,168,185)
 WHITE = p.Color(255,255,255)
@@ -136,6 +134,7 @@ def pause_menu_setup(SCREEN, FONTS):
     SCREEN.blit(text_surf, text_rect)
     p.display.update()
 
+#this will display everything on the HELP screen
 def help_setup(SCREEN, FONTS):
     drawBoard(SCREEN)
     text_surf, text_rect = text_objects(" HELP ", FONTS[1], WHITE)
@@ -249,6 +248,7 @@ def set_setup(SCREEN, FONTS):
     board_size_setup(SCREEN, FONTS)
     p.display.update()
 
+#this is just controls the game speed label (slowest/slow/normal/fast/fastest)
 def comp_speed_setup(SCREEN, FONTS):
     rect = p.Rect(1,1, BUTTON_WIDTH // 3, BUTTON_HEIGHT)
     text_surf, text_rect = text_objects(AI_MOVE_TITLES[DamasEngine.delay_index], FONTS[3], WHITE)
@@ -259,6 +259,7 @@ def comp_speed_setup(SCREEN, FONTS):
     SCREEN.blit(text_surf, text_rect)
     p.display.update()
 
+#and this is the board size label (8/10/12)
 def board_size_setup(SCREEN, FONTS):
     strBoardSize = "   " + str(DamasEngine.boardSize) + "   "
     rect = p.Rect(1,1, BUTTON_WIDTH // 5, BUTTON_HEIGHT)
@@ -269,8 +270,7 @@ def board_size_setup(SCREEN, FONTS):
     p.draw.rect(SCREEN, DARK_GREEN, rect, 0, BUTTON_ROUND)
     SCREEN.blit(text_surf, text_rect)
 
-
-
+#this is the controller for the main menu, here are all the buttons except the settings screen    
 def main_menu(SCREEN, FONTS, settings_menu = False, clock = p.time.Clock()):
     #these are all the menu variables
     SCREEN.fill(BROWN)
@@ -346,9 +346,10 @@ def main_menu(SCREEN, FONTS, settings_menu = False, clock = p.time.Clock()):
     p.quit()
     sys.exit(0)
 
+#this is all the information needed for the settings menu, it is loaded separately because when we change the board size
+#the board reloads and we are sent directly to this page
 def call_settings_menu(SCREEN, FONTS, boardSize = DamasEngine.boardSize, clock = p.time.Clock()):
     drawBoard(SCREEN)
-    main_menu_setup(SCREEN, FONTS)
     set_setup(SCREEN, FONTS)
     while True:
         click = False
@@ -414,7 +415,6 @@ def game(SCREEN, FONTS, whiteIsHuman, blackIsHuman, isPaused = False, gs = None,
     isDragging = False #this is to keep track of whether there is a piece being dragged right now
     isFrozen = False #this is a flag controlled by the SPACE bar to freeze computer play without calling the pause menu
     draggedPiece = () #this will be a tuple with the piece number, row and col info  (3,1,2) - white piece, row 1, col 2
-    mouse_pos = ()
     mistakes = 0
     #this just makes the game hold for a second if the first play is from the computer
     if not whiteIsHuman and not isPaused:
@@ -449,7 +449,6 @@ def game(SCREEN, FONTS, whiteIsHuman, blackIsHuman, isPaused = False, gs = None,
                                         isDragging = True
                                         draggedPiece = (gs.board[row][col], row, col)
                                         gs.board[row][col] = 0
-                                        mouse_pos = p.mouse.get_pos()
                                         break
                     elif e.button == 3: #right clicking anywhere will bring up the pause menu
                         call_pause_menu(SCREEN, FONTS, gs, whiteIsHuman, blackIsHuman)
@@ -465,7 +464,7 @@ def game(SCREEN, FONTS, whiteIsHuman, blackIsHuman, isPaused = False, gs = None,
                                         gs.makeMove(move)  
                                         moveMade = True
                                         break
-                                if not moveMade:
+                                if not moveMade: #this returns the dragged piece to the original location
                                     gs.board[draggedPiece[1]][draggedPiece[2]] = draggedPiece[0]
                             else:
                                 gs.board[draggedPiece[1]][draggedPiece[2]] = draggedPiece[0]        
@@ -612,6 +611,7 @@ def drawPieces(SCREEN, board):
             if piece != 0:
                 SCREEN.blit(IMAGES[piece], p.Rect(c*sq_size + diff + BORDER , r*sq_size + diff + BORDER , sq_size, sq_size))
 
+#Draw the piece being dragged, using the DRAGGED PIECES dict which have the pieces loaded a bit larger
 def drawDraggedPiece(SCREEN, draggedPiece, mouse_pos):
     piece = draggedPiece
     sq_size = MEASURES["sq_size"]
@@ -629,6 +629,7 @@ def drawCircle(SCREEN, mouse_pos, validMoves, color = BLUE_HOVER):
                 pos = (col * sq_size + (sq_size / 2) + BORDER, row * sq_size + (sq_size / 2) + BORDER)
                 p.draw.circle(SCREEN, color, pos, sq_size / 2 - (sq_size // 20), sq_size // 12)
 
+#two simple methods to help the program understand what is going on
 def getMouseRowCol():
     sq_size = MEASURES["sq_size"]
     location = p.mouse.get_pos()
