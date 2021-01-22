@@ -1,0 +1,104 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>c7e3813f-5389-4072-8ba3-0299d8bcb9b6</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>Damas\Main.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>Damas</Name>
+    <RootNamespace>Damas</RootNamespace>
+    <IsWindowsApplication>False</IsWindowsApplication>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Damas\Draw\Constants.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Damas\Menu.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Damas\Draw\Objects.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Damas\Draw\Screen.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Damas\Engine\GameState.py" />
+    <Compile Include="Damas\Game.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Damas\Main.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Damas\Draw\__init__.py" />
+    <Compile Include="Damas\Engine\Move.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Damas\Engine\__init__.py" />
+    <Compile Include="Damas\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Damas\Assets\" />
+    <Folder Include="Damas\Assets\Images\" />
+    <Folder Include="Damas\" />
+    <Folder Include="Damas\Draw\" />
+    <Folder Include="Damas\Engine\" />
+    <Folder Include="Damas\__pycache__\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Damas\Assets\Images\1.png" />
+    <Content Include="Damas\Assets\Images\10.png" />
+    <Content Include="Damas\Assets\Images\11.png" />
+    <Content Include="Damas\Assets\Images\12.png" />
+    <Content Include="Damas\Assets\Images\13.png" />
+    <Content Include="Damas\Assets\Images\14.png" />
+    <Content Include="Damas\Assets\Images\15.png" />
+    <Content Include="Damas\Assets\Images\16.png" />
+    <Content Include="Damas\Assets\Images\17.png" />
+    <Content Include="Damas\Assets\Images\18.png" />
+    <Content Include="Damas\Assets\Images\19.png" />
+    <Content Include="Damas\Assets\Images\2.png" />
+    <Content Include="Damas\Assets\Images\20.png" />
+    <Content Include="Damas\Assets\Images\21.png" />
+    <Content Include="Damas\Assets\Images\22.png" />
+    <Content Include="Damas\Assets\Images\23.png" />
+    <Content Include="Damas\Assets\Images\24.png" />
+    <Content Include="Damas\Assets\Images\25.png" />
+    <Content Include="Damas\Assets\Images\26.png" />
+    <Content Include="Damas\Assets\Images\3.png" />
+    <Content Include="Damas\Assets\Images\4.png" />
+    <Content Include="Damas\Assets\Images\5.png" />
+    <Content Include="Damas\Assets\Images\6.png" />
+    <Content Include="Damas\Assets\Images\7.png" />
+    <Content Include="Damas\Assets\Images\8.png" />
+    <Content Include="Damas\Assets\Images\9.png" />
+    <Content Include="Damas\Assets\OpenSans-Light.ttf" />
+    <Content Include="Damas\Assets\OpenSans-Regular.ttf" />
+    <Content Include="Damas\Assets\OpenSans-SemiBold.ttf" />
+    <Content Include="Damas\__pycache__\DamasEngine.cpython-37.pyc" />
+    <Content Include="Damas\__pycache__\__init__.cpython-37.pyc" />
+    <Content Include="Damas\damas_icon.bmp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>
